@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard";
 import Main from "./layouts/Main";
 import Staffs from "./pages/Staffs";
 import Categories from "./pages/Categories";
+import Batches from "./pages/Batches";
+import Departments from "./pages/Departments";
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="staffs" element={<Staffs />} />
             <Route path="categories" element={<Categories />} />
+            <Route path="batches" element={<Batches />} />
+            <Route path="departments" element={<Departments />} />
           </Route>
         </Route>
       </Routes>

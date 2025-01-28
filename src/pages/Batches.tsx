@@ -1,22 +1,21 @@
 import {
-  useCreateStaffMutation,
-  useStaffsQuery,
-  useDeleteStaffMutation,
-  useUpdateStaffMutation,
-} from "../features/slice/extended/staffs";
-import Dataset from "../components/Staffs/Dataset";
-import { useState } from "react";
+  useBatchesQuery,
+  useCreateBatchesMutation,
+  useUpdateBranchMutation,
+  useDeleteBatchesMutation,
+} from "../features/slice/extended/batch";
+import Dataset from "../components/Batches/Dataset";
 import { useForm } from "react-hook-form";
-import CreateUser from "../components/Staffs/CreateUser";
-import UpdateUser from "../components/Staffs/UpdateUser";
-import DeleteUser from "../components/Staffs/DeleteUser";
+import { useState } from "react";
+import CreateBatch from "../components/Batches/CreateBatch";
+import UpdateBatch from "../components/Batches/UpdateBatch";
+import DeleteBatch from "../components/Batches/DeleteBatch";
 
-const Staffs = () => {
-  const { data: staffs } = useStaffsQuery();
-
-  const [createStaff] = useCreateStaffMutation();
-  const [updateStaff] = useUpdateStaffMutation();
-  const [deleteStaff] = useDeleteStaffMutation();
+const Batches = () => {
+  const { data: batches } = useBatchesQuery();
+  const [createItem] = useCreateBatchesMutation();
+  const [updateItem] = useUpdateBranchMutation();
+  const [deleteItem] = useDeleteBatchesMutation();
 
   const {
     register,
@@ -40,13 +39,13 @@ const Staffs = () => {
   });
 
   /**
-   * create a user
+   * create Batch
    * @param dataset
    * @returns bool
    */
-  const createUser = async (dataset: any) => {
+  const createBatch = async (dataset: any) => {
     try {
-      const response = await createStaff(dataset);
+      const response = await createItem(dataset);
       return response;
     } catch (error: any) {
       setAction((state) => (state.errorMessage = error.message));
@@ -55,13 +54,13 @@ const Staffs = () => {
   };
 
   /**
-   * Update a user
+   * Update a Batch
    * @param dataset
    * @returns bool
    */
-  const updateUser = async (dataset: any) => {
+  const updateBatch = async (dataset: any) => {
     try {
-      const response = await updateStaff(dataset);
+      const response = await updateItem(dataset);
       return response;
     } catch (error: any) {
       setAction((state) => (state.errorMessage = error.message));
@@ -70,30 +69,53 @@ const Staffs = () => {
   };
 
   /**
-   * Delete a user
+   * Delete a Batch
    * @returns bool
    */
-  const deleteUser = async () => {
+  const deleteBatch = async () => {
     try {
-      const response = await deleteStaff(action.deletionId);
+      const response = await deleteItem(action.deletionId);
       return response;
     } catch (error: any) {
       setAction((state) => (state.errorMessage = error.message));
       return false;
     }
   };
+
+  /**
+   * Collection
+   */
+  const collection = batches?.map((batch) => (
+    <Dataset
+      batch={batch}
+      onEdit={() =>
+        setAction((state) => ({
+          ...state,
+          isEditing: !state.isEditing,
+          editingId: batch.id,
+        }))
+      }
+      onDelete={() =>
+        setAction((state) => ({
+          ...state,
+          isDeleting: !state.isDeleting,
+          deletionId: batch.id,
+        }))
+      }
+    />
+  ));
 
   return (
     <div className="rounded-sm bg-white p-5 min-h-[83vh]">
       <div className="flex justify-between w-full mt-2 mb-4">
-        <h1 className="font-bold">Staffs</h1>
+        <h1 className="font-bold">Batches</h1>
         <button
           onClick={() => {
             setAction((state) => ({ ...state, isOpen: !state.isOpen }));
           }}
           className="rounded-[20px] px-4 py-2 bg-green-300 text-sm text-black font-medium hover:bg-green-400"
         >
-          <i className="fa fa-plus"></i> Add New Staff
+          <i className="fa fa-plus"></i> Add New Batch
         </button>
       </div>
 
@@ -102,71 +124,44 @@ const Staffs = () => {
           <thead>
             <tr className="bg-gray-200 font-medium text-xs uppercase text-black">
               <th className="px-6 py-3">ID</th>
-              <th className="px-6 py-3">Name</th>
-              <th className="px-6 py-3">Email</th>
-              <th className="px-6 py-3">Gender</th>
-              <th className="px-6 py-3">Mobile 1</th>
-              <th className="px-6 py-3">Mobile 2</th>
-              <th className="px-6 py-3">Role</th>
+              <th className="px-6 py-3">Batch Name</th>
+              <th className="px-6 py-3">Division</th>
               <th className="px-6 py-3">Action</th>
             </tr>
           </thead>
-          <tbody>
-            {staffs?.map((user) => (
-              <Dataset
-                key={user.id}
-                user={user}
-                onEdit={() =>
-                  setAction((state) => ({
-                    ...state,
-                    isEditing: !state.isEditing,
-                    staff: user,
-                    editingId: user.id,
-                  }))
-                }
-                onDelete={() =>
-                  setAction((state) => ({
-                    ...state,
-                    isDeleting: !state.isDeleting,
-                    deletionId: user.id,
-                  }))
-                }
-              />
-            ))}
-          </tbody>
+          <tbody>{collection}</tbody>
         </table>
       </div>
 
       {action.isOpen && (
-        <CreateUser
+        <CreateBatch
           errors={errors}
           handleSubmit={handleSubmit}
-          onSubmit={createUser}
+          onSubmit={createBatch}
           register={register}
           setAction={setAction}
         />
       )}
 
       {action.isEditing && (
-        <UpdateUser
+        <UpdateBatch
           errors={updateError}
           handleSubmit={handleUpdate}
-          onSubmit={updateUser}
+          onSubmit={updateBatch}
           register={updateRegister}
-          action={action}
           setAction={setAction}
         />
       )}
 
       {action.isDeleting && (
-        <DeleteUser
+        <DeleteBatch
           action={action}
           setAction={setAction}
-          onSubmit={deleteUser}
+          onSubmit={deleteBatch}
         />
       )}
     </div>
   );
 };
 
-export default Staffs;
+export default Batches;

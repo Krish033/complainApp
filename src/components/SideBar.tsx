@@ -39,7 +39,7 @@ const SideBar = () => {
       </ul>
 
       <h1
-        className="text-xs mt-3 px-3 text-gray-700"
+        className="text-xs mt-5 px-5 text-gray-700"
         style={{ fontWeight: "600", letterSpacing: "5px" }}
       >
         MASTERS
@@ -78,7 +78,7 @@ const SideBar = () => {
           } hover:bg-white rounded-sm`}
         >
           <NavLink
-            to="/batches"
+            to="/admin/batches"
             className="font-medium text-sm"
             onClick={() => handleMenuClick("Batches")}
           >
@@ -91,7 +91,7 @@ const SideBar = () => {
           } hover:bg-white rounded-sm`}
         >
           <NavLink
-            to="/departments"
+            to="/admin/departments"
             className="font-medium text-sm"
             onClick={() => handleMenuClick("Departments")}
           >
