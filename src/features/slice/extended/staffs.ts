@@ -26,6 +26,16 @@ export const extendedSlice = api.injectEndpoints({
 
       invalidatesTags: ["User"],
     }),
+
+    updateStaff: builder.mutation({
+      query: (dataset) => ({
+        url: "/users",
+        method: "POST",
+        body: dataset,
+      }),
+
+      providesTags: ["Users"],
+    }),
   }),
 });
 
@@ -33,4 +43,5 @@ export const {
   useStaffsQuery,
   useCreateStaffMutation,
   useDeleteStaffMutation,
+  useUpdateStaffMutation,
 } = extendedSlice;
