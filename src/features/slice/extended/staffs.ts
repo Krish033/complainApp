@@ -4,6 +4,7 @@ export const extendedSlice = api.injectEndpoints({
   endpoints: (builder) => ({
     staffs: builder.query({
       query: () => "/users",
+      providesTags: ["Users"],
     }),
 
     createStaff: builder.mutation({
@@ -13,7 +14,7 @@ export const extendedSlice = api.injectEndpoints({
         body: dataset,
       }),
 
-      providesTags: ["Users"],
+      invalidatesTags: ["Users"],
     }),
 
     // Delete staff

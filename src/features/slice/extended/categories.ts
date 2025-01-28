@@ -14,6 +14,14 @@ export const extendedSlice = api.injectEndpoints({
       }),
     }),
 
+    updateCategory: builder.mutation({
+      query: (dataset) => ({
+        url: "/divisions",
+        method: "POST",
+        body: dataset,
+      }),
+    }),
+
     deleteCategory: builder.mutation({
       query: (dataset) => ({
         url: "/divisions/" + dataset.id,
@@ -27,5 +35,6 @@ export const extendedSlice = api.injectEndpoints({
 export const {
   useCategoryQuery,
   useCreateCategoryMutation,
+  useUpdateCategoryMutation,
   useDeleteCategoryMutation,
 } = extendedSlice;
