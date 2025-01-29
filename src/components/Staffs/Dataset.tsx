@@ -6,14 +6,28 @@ const Dataset = ({ user, onEdit, onDelete }) => {
       key={user.id}
       className="text-sm border-b border-gray-300 hover:bg-gray-50"
     >
-      <td className="px-6 py-2">{user.id}</td>
-      <td className="px-6 py-2">{user.name || "N/A"}</td>
-      <td className="px-6 py-2">{user.email || "N/A"}</td>
-      <td className="px-6 py-2">{user.gender || "N/A"}</td>
-      <td className="px-6 py-2">{user.mobile1 || "N/A"}</td>
-      <td className="px-6 py-2">{user.mobile2 || "N/A"}</td>
-      <td className="px-6 py-2">{user.role || "N/A"}</td>
-      <td className="px-6 py-2 space-x-2">
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
+        <input type="checkbox" name="" id="" />
+      </td>
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
+        {user.name || "N/A"}
+      </td>
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
+        {user.email || "N/A"}
+      </td>
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
+        {user.gender || "N/A"}
+      </td>
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
+        {user.mobile1 || "N/A"}
+      </td>
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
+        {user.mobile2 || "N/A"}
+      </td>
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
+        {user.role || "N/A"}
+      </td>
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em] space-x-2">
         <button onClick={onEdit}>
           <i className="fa fa-edit"></i>
         </button>

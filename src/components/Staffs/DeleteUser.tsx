@@ -5,10 +5,8 @@ const DeleteUser = ({ action, setAction, onSubmit }) => {
       style={{ background: "rgba(0,0,0,.5)" }}
     >
       <div className="bg-white p-8 rounded-2xl shadow-xl w-[400px]">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">
-          Confirm Delete
-        </h2>
-        <p className="text-gray-700 mb-6">
+        <h2 className="text-sm font-bold mb-6 text-gray-800">Confirm Delete</h2>
+        <p className="text-gray-700 mb-6 text-xs">
           Are you sure you want to delete this staff? This action cannot be
           undone.
         </p>
@@ -20,13 +18,13 @@ const DeleteUser = ({ action, setAction, onSubmit }) => {
                 isDeleting: !state.isDeleting,
               }));
             }}
-            className="font-bold text-sm px-3"
+            className="font-bold text-xs px-3"
           >
             <i className="fa fa-close"></i> Cancel
           </button>
           <button
             onClick={onSubmit}
-            className="rounded-[20px] px-4 py-2 bg-red-500 text-sm text-black font-medium hover:bg-red-800"
+            className="rounded-[20px] px-4 py-2 bg-red-500 text-xs text-black font-medium hover:bg-red-800"
           >
             <i className="fa fa-trash"></i> Delete
           </button>

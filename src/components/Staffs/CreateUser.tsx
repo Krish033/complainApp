@@ -13,33 +13,37 @@ const CreateUser = ({
       style={{ background: "rgba(0,0,0,.5)" }}
     >
       <div className="bg-white p-8 rounded-2xl shadow-xl w-[600px]">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">Add New Staff</h2>
+        <h2 className="text-sm font-bold mb-6 text-gray-800">
+          <i className="fa fa-plus"></i> Add New Staff
+        </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Name and Email Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Name</label>
+              <label className="block text-xs font-medium mb-2">Name</label>
               <input
                 type="text"
-                {...register("name", { required: "Name is required" })}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500"
+                {...register("userName", { required: "Name is required" })}
+                placeholder="eg.., Bernard Hackwell"
+                className="w-full p-3 border text-xs border-gray-300 rounded-lg focus:ring focus:ring-blue-500"
               />
-              {errors.name && (
+              {errors.userEmail && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.name.message}
+                  {errors.userName.message}
                 </p>
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Email</label>
+              <label className="block text-xs font-medium mb-2">Email</label>
               <input
                 type="email"
-                {...register("email", { required: "Email is required" })}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500"
+                {...register("userEmail", { required: "Email is required" })}
+                placeholder="eg.., bernard@hackwell.com"
+                className="w-full p-3 border  text-xs border-gray-300 rounded-lg focus:ring focus:ring-blue-500"
               />
-              {errors.email && (
+              {errors.userEmail && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.email.message}
+                  {errors.userEmail.message}
                 </p>
               )}
             </div>
@@ -47,45 +51,80 @@ const CreateUser = ({
 
           {/* Gender Field */}
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">Gender</label>
+            <label className="block text-xs font-medium mb-2">Gender</label>
             <div className="flex items-center space-x-6">
               <label className="flex items-center space-x-2">
                 <input
                   type="radio"
-                  value="male"
-                  {...register("gender", {
+                  value="M"
+                  {...register("userGender", {
                     required: "Please select a gender",
                   })}
                   className="form-radio text-blue-500 focus:ring-blue-500"
                 />
-                <span className="text-gray-700">Male</span>
+                <span className="text-gray-700  text-xs">Male</span>
               </label>
               <label className="flex items-center space-x-2">
                 <input
                   type="radio"
-                  value="female"
-                  {...register("gender", {
+                  value="F"
+                  {...register("userGender", {
                     required: "Please select a gender",
                   })}
                   className="form-radio text-blue-500 focus:ring-blue-500"
                 />
-                <span className="text-gray-700">Female</span>
+                <span className="text-gray-700  text-xs">Female</span>
               </label>
             </div>
-            {errors.gender && (
+            {errors.userGender && (
               <p className="text-red-500 text-xs mt-1">
-                {errors.gender.message}
+                {errors.userGender.message}
               </p>
             )}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label className="block text-xs font-medium mb-2">
+                Register Number
+              </label>
+              <input
+                type="text"
+                {...register("regnum", {
+                  required: "Register Number is required",
+                })}
+                placeholder="eg.., RTC12345"
+                className="w-full p-3 border text-xs border-gray-300 rounded-lg focus:ring focus:ring-blue-500"
+              />
+              {errors.regnum && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.regnum.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <label className="block text-xs font-medium mb-2">Password</label>
+              <input
+                type="password"
+                {...register("password", { required: "Password is required" })}
+                placeholder="eg.., ********"
+                className="w-full p-3 border  text-xs border-gray-300 rounded-lg focus:ring focus:ring-blue-500"
+              />
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
           </div>
 
           {/* Mobile Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Mobile 1</label>
+              <label className="block text-xs font-medium mb-2">Mobile 1</label>
               <input
                 type="text"
-                {...register("mobile1", {
+                {...register("userMobile1", {
                   required: "Mobile number is required",
                   pattern: {
                     value: /^[6-9]\d{9}$/,
@@ -93,19 +132,20 @@ const CreateUser = ({
                       "Enter a valid 10-digit mobile number starting with 6, 7, 8, or 9",
                   },
                 })}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500"
+                placeholder="eg..., +91 6374 897 XXX"
+                className="w-full p-3 border  text-xs border-gray-300 rounded-lg focus:ring focus:ring-blue-500"
               />
-              {errors.mobile1 && (
+              {errors.userMobile1 && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.mobile1.message}
+                  {errors.userMobile1.message}
                 </p>
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Mobile 2</label>
+              <label className="block text-xs font-medium mb-2">Mobile 2</label>
               <input
                 type="text"
-                {...register("mobile2", {
+                {...register("userMobile2", {
                   required: "Mobile number is required",
                   pattern: {
                     value: /^[6-9]\d{9}$/,
@@ -113,11 +153,12 @@ const CreateUser = ({
                       "Enter a valid 10-digit mobile number starting with 6, 7, 8, or 9",
                   },
                 })}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500"
+                placeholder="eg..., +91 6374 897 XXX"
+                className="w-full p-3  text-xs border border-gray-300 rounded-lg focus:ring focus:ring-blue-500"
               />
-              {errors.mobile2 && (
+              {errors.userMobile2 && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.mobile2.message}
+                  {errors.userMobile2.message}
                 </p>
               )}
             </div>
@@ -125,29 +166,31 @@ const CreateUser = ({
 
           {/* Role Field */}
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">Role</label>
+            <label className="block text-xs font-medium mb-2">Role</label>
             <div className="flex items-center space-x-6">
               <label className="flex items-center space-x-2">
                 <input
                   type="radio"
-                  value="staff"
-                  {...register("role", { required: "Role is required" })}
+                  value="Faculty"
+                  {...register("userRole", { required: "Role is required" })}
                   className="form-radio text-blue-500 focus:ring-blue-500"
                 />
-                <span className="text-gray-700">Staff</span>
+                <span className="text-gray-700 text-xs">Staff</span>
               </label>
               <label className="flex items-center space-x-2">
                 <input
                   type="radio"
-                  value="super_admin"
-                  {...register("role", { required: "Role is required" })}
+                  value="Admin"
+                  {...register("userRole", { required: "Role is required" })}
                   className="form-radio text-blue-500 focus:ring-blue-500"
                 />
-                <span className="text-gray-700">Super Admin</span>
+                <span className="text-gray-700 text-xs">Super Admin</span>
               </label>
             </div>
-            {errors.role && (
-              <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>
+            {errors.userRole && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.userRole.message}
+              </p>
             )}
           </div>
 
@@ -156,7 +199,7 @@ const CreateUser = ({
               onClick={() => {
                 setAction((state) => ({ ...state, isOpen: !state.isOpen }));
               }}
-              className="font-bold text-sm px-3"
+              className="font-bold text-xs px-3"
             >
               <i className="fa fa-close"></i> Cancel
             </button>

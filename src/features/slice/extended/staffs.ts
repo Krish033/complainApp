@@ -19,23 +19,22 @@ export const extendedSlice = api.injectEndpoints({
 
     // Delete staff
     deleteStaff: builder.mutation({
-      query: (dataset) => ({
-        url: "/users/" + dataset.id,
+      query: (id) => ({
+        url: "/users/" + id,
         method: "DELETE",
-        body: dataset,
       }),
 
-      invalidatesTags: ["User"],
+      invalidatesTags: ["Users"],
     }),
 
     updateStaff: builder.mutation({
       query: (dataset) => ({
-        url: "/users",
-        method: "POST",
+        url: "/users/" + dataset.id,
+        method: "PUT",
         body: dataset,
       }),
 
-      providesTags: ["Users"],
+      invalidatesTags: ["Users"],
     }),
   }),
 });

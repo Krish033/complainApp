@@ -15,7 +15,7 @@ const Main = () => {
         <AppBar />
 
         {/* Scrollable section */}
-        <section className="flex-1 p-3 overflow-auto">
+        <section className="flex-1 px-[5em] pt-3 overflow-auto">
           <Outlet />
         </section>
       </div>

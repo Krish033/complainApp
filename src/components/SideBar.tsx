@@ -12,8 +12,7 @@ const SideBar = () => {
   };
 
   return (
-    <aside className="h-screen w-[350px] bg-gray-200">
-      {/* Logo Section */}
+    <aside className="h-screen w-[250px] bg-white shadow-sm px-2">
       <div className="bg-white">
         <img
           className="block mx-auto mb-3 h-[64px] object-contain"
@@ -22,15 +21,15 @@ const SideBar = () => {
         />
       </div>
 
-      <ul className="px-2">
+      <ul className="">
         <li
-          className={`px-3 py-2 ${
-            navigation === "Dashboard" ? "bg-white rounded-sm" : ""
-          } hover:bg-white rounded-sm`}
+          className={`px-2 ${
+            navigation === "Dashboard" ? "text-blue-500" : ""
+          } hover:text-blue-600`}
         >
           <NavLink
             to="/"
-            className="font-medium text-sm"
+            className="font-medium text-xs"
             onClick={() => handleMenuClick("Dashboard")}
           >
             Dashboard
@@ -38,61 +37,59 @@ const SideBar = () => {
         </li>
       </ul>
 
-      <h1
-        className="text-xs mt-5 px-5 text-gray-700"
-        style={{ fontWeight: "600", letterSpacing: "5px" }}
-      >
-        MASTERS
+      <h1 className="font-medium mt-3 px-2 text-black">
+        <i className="fa fa-caret-down"></i>{" "}
+        <span className="text-xs font-bold">Master</span>
       </h1>
 
-      <ul className="mt-3 space-y-2 px-2">
+      <ul className="px-[.4em] mt-2">
         <li
-          className={`px-3 py-2 ${
-            navigation === "Staffs" ? "bg-white rounded-sm" : ""
-          } hover:bg-white rounded-sm`}
+          className={`px-4 ${
+            navigation === "Staffs" ? "text-blue-500" : ""
+          } hover:text-blue-600`}
         >
           <NavLink
             to="/admin/staffs"
-            className="font-medium text-sm"
+            className="font-medium text-xs"
             onClick={() => handleMenuClick("Staffs")}
           >
-            Staffs
+            Staff Management
           </NavLink>
         </li>
         <li
-          className={`px-3 py-2 ${
-            navigation === "Categories" ? "bg-white rounded-sm" : ""
-          } hover:bg-white rounded-sm`}
+          className={`px-4 ${
+            navigation === "Categories" ? "text-blue-500" : ""
+          } hover:text-blue-600`}
         >
           <NavLink
             to="/admin/categories"
-            className="font-medium text-sm"
+            className="font-medium text-xs"
             onClick={() => handleMenuClick("Categories")}
           >
-            Categories
+            Categories/Organizations
           </NavLink>
         </li>
         <li
-          className={`px-3 py-2 ${
-            navigation === "Batches" ? "bg-white rounded-sm" : ""
-          } hover:bg-white rounded-sm`}
+          className={`px-4 ${
+            navigation === "Batches" ? "text-blue-500" : ""
+          } hover:text-blue-600`}
         >
           <NavLink
             to="/admin/batches"
-            className="font-medium text-sm"
+            className="font-medium text-xs"
             onClick={() => handleMenuClick("Batches")}
           >
             Batches
           </NavLink>
         </li>
         <li
-          className={`px-3 py-2 ${
-            navigation === "Departments" ? "bg-white rounded-sm" : ""
-          } hover:bg-white rounded-sm`}
+          className={`px-4 ${
+            navigation === "Departments" ? "text-blue-500" : ""
+          } hover:text-blue-600`}
         >
           <NavLink
             to="/admin/departments"
-            className="font-medium text-sm"
+            className="font-medium text-xs"
             onClick={() => handleMenuClick("Departments")}
           >
             Departments

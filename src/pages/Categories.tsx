@@ -27,6 +27,7 @@ const Categories = () => {
     register: updateRegister,
     handleSubmit: handleUpdate,
     formState: { errors: updateError },
+    setValue,
   } = useForm();
 
   const [action, setAction] = useState({
@@ -35,8 +36,23 @@ const Categories = () => {
     isDeleting: false,
     editingId: null,
     deletionId: null,
-    errorMessage: null,
+    errorMessage: "",
+    message: "",
+    staff: null,
   });
+
+  const resetState = () => {
+    setAction((state) => ({
+      isOpen: false,
+      isEditing: false,
+      isDeleting: false,
+      editingId: null,
+      deletionId: null,
+      errorMessage: "",
+      message: "",
+      staff: null,
+    }));
+  };
 
   /**
    * create category
@@ -46,9 +62,11 @@ const Categories = () => {
   const createCategory = async (dataset: any) => {
     try {
       const response = await createItem(dataset);
+      resetState();
+      setAction((state) => ({ ...state, message: response?.data?.message }));
       return response;
     } catch (error: any) {
-      setAction((state) => (state.errorMessage = error.message));
+      console.table({ ...error });
       return false;
     }
   };
@@ -61,9 +79,11 @@ const Categories = () => {
   const updateCategory = async (dataset: any) => {
     try {
       const response = await updateItem(dataset);
+      resetState();
+      setAction((state) => ({ ...state, message: response?.data?.message }));
       return response;
     } catch (error: any) {
-      setAction((state) => (state.errorMessage = error.message));
+      console.table({ ...error });
       return false;
     }
   };
@@ -75,9 +95,11 @@ const Categories = () => {
   const deleteCategory = async () => {
     try {
       const response = await deleteItem(action.deletionId);
+      resetState();
+      setAction((state) => ({ ...state, message: response?.data?.message }));
       return response;
     } catch (error: any) {
-      setAction((state) => (state.errorMessage = error.message));
+      console.table({ ...error });
       return false;
     }
   };
@@ -88,13 +110,21 @@ const Categories = () => {
   const collection = categories?.map((category) => (
     <Dataset
       category={category}
-      onEdit={() =>
+      onEdit={() => {
         setAction((state) => ({
           ...state,
           isEditing: !state.isEditing,
           editingId: category.id,
-        }))
-      }
+        }));
+
+        setValue("userName", user.name);
+        setValue("userEmail", user.email);
+        setValue("userGender", user.gender);
+        setValue("regnum", user.regNum);
+        setValue("userMobile1", user.moblie1);
+        setValue("userMobile2", user.moblie2);
+        setValue("userRole", user.role);
+      }}
       onDelete={() =>
         setAction((state) => ({
           ...state,
@@ -106,14 +136,46 @@ const Categories = () => {
   ));
 
   return (
-    <div className="rounded-sm bg-white p-5 min-h-[83vh]">
+    <div className="">
+      {action.message && (
+        <div className="bg-green-300 my-3 px-4 py-3 rounded-md flex justify-between">
+          <p className="m-0 text-xs font-medium text-green-800">
+            <i className="fa fa-check-circle"></i> {action.message}
+          </p>
+
+          <button
+            onClick={() => setAction((state) => ({ ...state, message: "" }))}
+            className="text-xs bg-transparent outline-none border-none"
+          >
+            <i className="fa fa-close"></i>
+          </button>
+        </div>
+      )}
+
+      {action.errorMessage && (
+        <div className="bg-red-300 my-3 px-4 py-3 rounded-md flex justify-between">
+          <p className="m-0 text-xs font-medium text-red-800">
+            <i className="fa fa-check-circle"></i> {action.errorMessage}
+          </p>
+
+          <button
+            onClick={() =>
+              setAction((state) => ({ ...state, errorMessage: "" }))
+            }
+            className="text-xs bg-transparent outline-none border-none"
+          >
+            <i className="fa fa-close"></i>
+          </button>
+        </div>
+      )}
+
       <div className="flex justify-between w-full mt-2 mb-4">
-        <h1 className="font-bold">Categories</h1>
+        <h1 className="text-[1em] font-bold">Categories/Organizations</h1>
         <button
           onClick={() => {
             setAction((state) => ({ ...state, isOpen: !state.isOpen }));
           }}
-          className="rounded-[20px] px-4 py-2 bg-green-300 text-sm text-black font-medium hover:bg-green-400"
+          className="rounded-[20px] px-3 py-1.5 bg-green-300 text-[.7em] text-black font-medium hover:bg-green-500"
         >
           <i className="fa fa-plus"></i> Add New Category
         </button>
@@ -122,10 +184,10 @@ const Categories = () => {
       <div className="overflow-x-auto rounded-lg shadow-md">
         <table className="min-w-full table-auto text-left">
           <thead>
-            <tr className="bg-gray-200 font-medium text-xs uppercase text-black">
-              <th className="px-6 py-3">ID</th>
-              <th className="px-6 py-3">Category Name</th>
-              <th className="px-6 py-3">Action</th>
+            <tr className="bg-gray-300 text-[.76em] text-black">
+              <th className="px-6 py-2 font-bold">ID</th>
+              <th className="px-6 py-2 font-bold">Category Name</th>
+              <th className="px-6 py-2 font-bold">Action</th>
             </tr>
           </thead>
           <tbody>{collection}</tbody>
