@@ -8,6 +8,8 @@ import Staffs from "./pages/Staffs";
 import Categories from "./pages/Categories";
 import Batches from "./pages/Batches";
 import Departments from "./pages/Departments";
+import MasterRoute from "./layouts/auth/MasterRoute";
+import Master from "./pages/Master";
 
 const App = () => {
   return (
@@ -15,6 +17,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<AccessRoute />}>
           <Route index element={<Login />} />
+        </Route>
+
+        <Route path="/faculty" element={<MasterRoute />}>
+          <Route index element={<Master />} />
         </Route>
 
         <Route path="/admin" element={<ProtectedRoute />}>

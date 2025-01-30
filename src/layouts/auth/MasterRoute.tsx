@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ProtectedRoute = () => {
+const MasterRoute = () => {
   // Replace this with your actual authentication state from Redux or Context
   const user = useSelector(
-    (state) => state.auth.user && state.auth.user.role == "Super Admin"
+    (state) => state.auth.user && state.auth.user.role == "Faculty"
   );
 
   if (!user) {
@@ -15,4 +15,4 @@ const ProtectedRoute = () => {
   return <Outlet />;
 };
 
-export default ProtectedRoute;
+export default MasterRoute;

@@ -96,6 +96,27 @@ const SideBar = () => {
           </NavLink>
         </li>
       </ul>
+
+      <h1 className="font-medium mt-3 px-2 text-black">
+        <i className="fa fa-caret-down"></i>{" "}
+        <span className="text-xs font-bold">Modules</span>
+      </h1>
+
+      <ul className="px-[.4em] mt-2">
+        <li
+          className={`px-4 ${
+            navigation === "Complaints" ? "text-blue-500" : ""
+          } hover:text-blue-600`}
+        >
+          <NavLink
+            to="/admin/staffs"
+            className="font-medium text-xs"
+            onClick={() => handleMenuClick("Complaints")}
+          >
+            Complaints
+          </NavLink>
+        </li>
+      </ul>
     </aside>
   );
 };
