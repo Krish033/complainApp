@@ -38,7 +38,6 @@ const Categories = () => {
     deletionId: null,
     errorMessage: "",
     message: "",
-    staff: null,
   });
 
   const resetState = () => {
@@ -50,7 +49,6 @@ const Categories = () => {
       deletionId: null,
       errorMessage: "",
       message: "",
-      staff: null,
     }));
   };
 
@@ -78,7 +76,7 @@ const Categories = () => {
    */
   const updateCategory = async (dataset: any) => {
     try {
-      const response = await updateItem(dataset);
+      const response = await updateItem({ ...dataset, id: action.editingId });
       resetState();
       setAction((state) => ({ ...state, message: response?.data?.message }));
       return response;
@@ -117,13 +115,7 @@ const Categories = () => {
           editingId: category.id,
         }));
 
-        setValue("userName", user.name);
-        setValue("userEmail", user.email);
-        setValue("userGender", user.gender);
-        setValue("regnum", user.regNum);
-        setValue("userMobile1", user.moblie1);
-        setValue("userMobile2", user.moblie2);
-        setValue("userRole", user.role);
+        setValue("division_name", category.division_name);
       }}
       onDelete={() =>
         setAction((state) => ({
@@ -182,9 +174,10 @@ const Categories = () => {
       </div>
 
       <div className="overflow-x-auto rounded-lg shadow-md">
-        <table className="min-w-full table-auto text-left">
+        <table className="min-w-full table-auto bg-white rounded-lg text-left">
           <thead>
             <tr className="bg-gray-300 text-[.76em] text-black">
+              <th className="px-6 py-2 font-bold">#</th>
               <th className="px-6 py-2 font-bold">ID</th>
               <th className="px-6 py-2 font-bold">Category Name</th>
               <th className="px-6 py-2 font-bold">Action</th>

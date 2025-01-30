@@ -13,40 +13,44 @@ const CreateDepartment = ({
       style={{ background: "rgba(0,0,0,.5)" }}
     >
       <div className="bg-white p-8 rounded-2xl shadow-xl w-[600px]">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">
+        <h2 className="text-sm font-bold mb-6 text-gray-800">
           Add New Department
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Name and Email Fields */}
           <div className="mb-4">
             <div className="mb-3">
-              <label className="block text-sm font-medium mb-2">Batch Id</label>
+              <label className="block text-xs font-medium mb-2">
+                Branch Id
+              </label>
               <input
                 type="number"
-                {...register("batchId", { required: "Batch ID is required" })}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500 mb-3"
+                {...register("branch_id", { required: "Batch ID is required" })}
+                className="w-full text-xs p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500 mb-3"
+                placeholder="eg.., 3"
               />
-              {errors.batchId && (
+              {errors.branch_id && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.batchId.message}
+                  {errors.branch_id.message}
                 </p>
               )}
             </div>
 
             <div className="mb-3">
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-xs font-medium mb-2">
                 Department Name
               </label>
               <input
                 type="text"
-                {...register("department", {
+                {...register("department_name", {
                   required: "Department is required",
                 })}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500 mb-3"
+                className="w-full text-xs p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500 mb-3"
+                placeholder="in.., IT | CSE |AI & DS"
               />
-              {errors.department && (
+              {errors.department_name && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.department.message}
+                  {errors.department_name.message}
                 </p>
               )}
             </div>
@@ -57,7 +61,7 @@ const CreateDepartment = ({
               onClick={() => {
                 setAction((state) => ({ ...state, isOpen: !state.isOpen }));
               }}
-              className="font-bold text-sm px-3"
+              className="font-bold text-xs px-3"
             >
               <i className="fa fa-close"></i> Cancel
             </button>

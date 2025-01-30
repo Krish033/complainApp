@@ -5,6 +5,9 @@ const Dataset = ({ category, onEdit, onDelete }) => {
       className="text-sm border-b border-gray-300 hover:bg-gray-50"
     >
       <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
+        <input type="checkbox" name="" id="" />
+      </td>
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
         {category.id}
       </td>
       <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">

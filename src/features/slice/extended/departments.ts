@@ -4,6 +4,7 @@ export const extendedSlice = api.injectEndpoints({
   endpoints: (builder) => ({
     departments: builder.query({
       query: () => "/departments",
+      providesTags: ["Departments"],
     }),
 
     createDepartment: builder.mutation({
@@ -12,6 +13,8 @@ export const extendedSlice = api.injectEndpoints({
         method: "POST",
         body: dataset,
       }),
+
+      invalidatesTags: ["Departments"],
     }),
 
     updateDepartment: builder.mutation({
@@ -20,14 +23,18 @@ export const extendedSlice = api.injectEndpoints({
         method: "POST",
         body: dataset,
       }),
+
+      invalidatesTags: ["Departments"],
     }),
 
     deleteDepartment: builder.mutation({
       query: (dataset) => ({
-        url: "/departments/" + dataset.id,
+        url: "/departments/" + dataset,
         method: "DELETE",
         body: dataset,
       }),
+
+      invalidatesTags: ["Departments"],
     }),
   }),
 });

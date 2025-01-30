@@ -4,10 +4,19 @@ const Dataset = ({ batch, onEdit, onDelete }) => {
       key={batch.id}
       className="text-sm border-b border-gray-300 hover:bg-gray-50"
     >
-      <td className="px-6 py-4">{batch.id}</td>
-      <td className="px-6 py-4">{batch.branch_name || "N/A"}</td>
-      <td className="px-6 py-4">{batch.division_name || "N/A"}</td>
-      <td className="px-6 py-4 space-x-2">
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
+        <input type="checkbox" name="" id="" />
+      </td>
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
+        {batch.id}
+      </td>
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
+        {batch.branch_name || "N/A"}
+      </td>
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em]">
+        {batch.division_name || "N/A"}
+      </td>
+      <td className="px-6 py-2.5 font-normal font-sans text-[.85em] space-x-2">
         <button onClick={onEdit}>
           <i className="fa fa-edit"></i>
         </button>
