@@ -11,9 +11,41 @@ import CreateUser from "../components/Staffs/CreateUser";
 import UpdateUser from "../components/Staffs/UpdateUser";
 import DeleteUser from "../components/Staffs/DeleteUser";
 
-const Staffs = () => {
-  const { data: staffs } = useStaffsQuery();
+type Staff = {
+  id: number;
+  name: string;
+  email: string;
+  regNum: string;
+  moblie1: number;
+  mobile2: number;
+  gender: string;
+  role: string;
+};
 
+type Action = {
+  isOpen: boolean;
+  isEditing: boolean;
+  isDeleting: boolean;
+  editingId: number | null;
+  deletionId: number | null;
+  errorMessage: string;
+  message: string;
+  staff: Staff | undefined;
+};
+
+type StaffForm = {
+  userName: string;
+  userEmail: string;
+  userGender: string;
+  regnum: string;
+  password: string;
+  userMobile1: number;
+  userMobile2: number;
+  userRole: string;
+};
+
+const Staffs = () => {
+  const { data: staffs } = useStaffsQuery<Staff[]>();
   const [createStaff] = useCreateStaffMutation();
   const [updateStaff] = useUpdateStaffMutation();
   const [deleteStaff] = useDeleteStaffMutation();
@@ -31,7 +63,7 @@ const Staffs = () => {
     setValue,
   } = useForm();
 
-  const [action, setAction] = useState({
+  const [action, setAction] = useState<Action>({
     isOpen: false,
     isEditing: false,
     isDeleting: false,
@@ -39,11 +71,11 @@ const Staffs = () => {
     deletionId: null,
     errorMessage: "",
     message: "",
-    staff: null,
+    staff: undefined,
   });
 
   const resetState = () => {
-    setAction((state) => ({
+    setAction((state: Action) => ({
       isOpen: false,
       isEditing: false,
       isDeleting: false,
@@ -51,7 +83,7 @@ const Staffs = () => {
       deletionId: null,
       errorMessage: "",
       message: "",
-      staff: null,
+      staff: undefined,
     }));
   };
 
@@ -60,12 +92,12 @@ const Staffs = () => {
    * @param dataset
    * @returns bool
    */
-  const createUser = async (dataset: any) => {
+  const createUser = async (dataset: StaffForm): Promise<boolean> => {
     try {
       const response = await createStaff(dataset);
       resetState();
       setAction((state) => ({ ...state, message: response?.data?.message }));
-      return response;
+      return true;
     } catch (error: any) {
       console.table({ ...error });
       return false;
@@ -77,12 +109,15 @@ const Staffs = () => {
    * @param dataset
    * @returns bool
    */
-  const updateUser = async (dataset: any) => {
+  const updateUser = async (dataset: StaffForm): Promise<boolean> => {
     try {
       const response = await updateStaff({ ...dataset, id: action.editingId });
       resetState();
-      setAction((state) => ({ ...state, message: response?.data?.message }));
-      return response;
+      setAction((state: Action) => ({
+        ...state,
+        message: response?.data?.message,
+      }));
+      return true;
     } catch (error: any) {
       console.table({ ...error });
       return false;
@@ -93,12 +128,15 @@ const Staffs = () => {
    * Delete a user
    * @returns bool
    */
-  const deleteUser = async () => {
+  const deleteUser = async (): Promise<boolean> => {
     try {
       const response = await deleteStaff(action.deletionId);
       resetState();
-      setAction((state) => ({ ...state, message: response?.data?.message }));
-      return response;
+      setAction((state: Action) => ({
+        ...state,
+        message: response?.data?.message,
+      }));
+      return true;
     } catch (error: any) {
       console.table({ ...error });
       return false;
